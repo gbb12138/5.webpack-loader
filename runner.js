@@ -1,4 +1,4 @@
-const {runLoaders} = require('loader-runner');
+const {runLoaders} = require('./loader-runner');
 const path = require('path');
 const fs = require('fs');
 const entryFile = path.resolve(__dirname, 'src', 'title.js'); // 入口文件
@@ -27,7 +27,7 @@ let rules = [   // loader的转换规则配置
 let request = `inline1-loader!inline2-loader!${entryFile}`;
 let parts = request.replace(/^-?!+/, '').split('!'); // ['inline1-loader', 'inline2-loader', entryFile]
 let resource = parts.pop(); // entryFile
-const resolveLoader = loader => path.resolve(__dirname, 'loaders', loader); // 获取loader的绝对路径
+const resolveLoader = loader => path.resolve(__dirname, 'runner', loader); // 获取loader的绝对路径
 const inlineLoaders = parts; // ['inline1-loader', 'inline2-loader']
 let preLoaders = [], postLoaders = [], normalLoaders = [];
 rules.forEach(rule => {
@@ -56,8 +56,11 @@ if (request.startsWith('!!')) {
 } else {
     loaders = [...postLoaders, ...inlineLoaders, ...normalLoaders, ...preLoaders];
 }
+
 loaders = loaders.map(resolveLoader);
 loaders = loaders.map(loader => resolveLoader(loader)); // loader绝对路径的数组
+
+
 runLoaders(
     {
         resource, // 要加载和转换的模块

@@ -32,24 +32,24 @@ module.exports = {
                 //     }
                 // }
                 use: [ // 直接配置就是normal
-                    path.resolve(__dirname, 'loaders','normal1-loader.js'),
-                    path.resolve(__dirname, 'loaders','normal2-loader.js')
+                    path.resolve(__dirname, 'runner','normal1-loader.js'),
+                    path.resolve(__dirname, 'runner','normal2-loader.js')
                 ]
             },
             { // enforce： post就是后置loader
                 test: /\.js$/,
                 enforce: "post",
                 use: [
-                    path.resolve(__dirname, 'loaders','post1-loader.js'),
-                    path.resolve(__dirname, 'loaders','post2-loader.js')
+                    path.resolve(__dirname, 'runner','post1-loader.js'),
+                    path.resolve(__dirname, 'runner','post2-loader.js')
                 ]
             },
             { // enforce： pre就是前置loader
                 test: /\.js$/,
                 enforce: "pre",
                 use: [
-                    path.resolve(__dirname, 'loaders','pre1-loader.js'),
-                    path.resolve(__dirname, 'loaders','pre2-loader.js')
+                    path.resolve(__dirname, 'runner','pre1-loader.js'),
+                    path.resolve(__dirname, 'runner','pre2-loader.js')
                 ]
             }
         ]

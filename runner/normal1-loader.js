@@ -4,6 +4,6 @@ function loader (source) {
 }
 loader.pitch = function () {
     console.log('normal1 pitch');
-    return 'var v = "normal1"';
+    // return 'var v = "normal1"';
 }
 module.exports = loader;
