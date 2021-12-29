@@ -1,2 +1,3 @@
-let title = require('./title');
-console.log(title)
+let sum = (a, b) => {
+    return a + b;
+}
