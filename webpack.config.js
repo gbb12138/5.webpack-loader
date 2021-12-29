@@ -10,6 +10,7 @@ module.exports = {
     },
     // webpack解析loader的时候配置如何查找
     resolveLoader: {
+        // alias 和 modules至少配置一种去寻找
         // 配置别名
         alias: {
             'inline1-loader': path.resolve(__dirname, 'loaders','inline1-loader.js'),
@@ -23,13 +24,33 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ["@babel/preset-env"],
-                        plugins: []
-                    }
-                }
+                // use: {
+                //     loader: 'babel-loader',
+                //     options: {
+                //         presets: ["@babel/preset-env"],
+                //         plugins: []
+                //     }
+                // }
+                use: [ // 直接配置就是normal
+                    path.resolve(__dirname, 'loaders','normal1-loader.js'),
+                    path.resolve(__dirname, 'loaders','normal2-loader.js')
+                ]
+            },
+            { // enforce： post就是后置loader
+                test: /\.js$/,
+                enforce: "post",
+                use: [
+                    path.resolve(__dirname, 'loaders','post1-loader.js'),
+                    path.resolve(__dirname, 'loaders','post2-loader.js')
+                ]
+            },
+            { // enforce： pre就是前置loader
+                test: /\.js$/,
+                enforce: "pre",
+                use: [
+                    path.resolve(__dirname, 'loaders','pre1-loader.js'),
+                    path.resolve(__dirname, 'loaders','pre2-loader.js')
+                ]
             }
         ]
     },
